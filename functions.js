@@ -85,11 +85,12 @@ const number_Api=async (number)=>{
 
 const Num =async (req, res) =>{
     try {
-        const number = Number(req.query.number)         
+        const number = Number(req.query.number)                 
 
         if(isNaN(number) == true ||
             Number.isInteger(number) == false||
-            Math.sign(number) == -1){
+            Math.sign(number) == -1 ||
+            number === 0){
             return res.status(400).json({
                 "number": `${req.query.number}`,
                 "error": true
@@ -100,12 +101,6 @@ const Num =async (req, res) =>{
         const { is_perfect } = isPerfect(number, divisor);
         const { digit_sum, properties } = armstrongDigitSum(number);
         const fun_fact = await number_Api(number);
-
-        try {
-            fun_fact = await number_Api(number) 
-        } catch (error) {
-            console.log(error.message)
-        }
 
         return res.status(200).json({
             number,
