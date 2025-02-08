@@ -9,21 +9,18 @@ const isPrime = (number) => {
     if (number === 2){
         return { is_prime: true, divisor: [1] };
     } 
-    if (number % 2 === 0){
-        return { is_prime: false, divisor: [1, 2] };
-    } 
     
     let divisor = [1];
     let is_prime = true;
     
-    for (let i = 2; i <= Math.sqrt(number); i++) {
+    for (let i = 2; i < number; i++) {        
         if (number % i === 0) {
-            divisor.push(i, number / i);
+            divisor.push(i);
             is_prime = false;
         }
     }
     
-    return { is_prime, divisor: [...new Set(divisor)] };
+    return { is_prime, divisor };
 };
 
 const isPerfect = (number, divisor) =>{
@@ -112,17 +109,7 @@ const Num =async (req, res) =>{
         })
     } catch (error) {
        console.log(error);
-       if(error.name == 'ReferenceError'){
-            return res.status(400).json({
-                "number": "alphabet",
-                "error": true
-            })
-       }else{
-            return res.status(400).json({
-                "number":"parameters",
-                "error":"expected number got symbols"
-            })
-       }
+       return res.status(500).json({error: error.message})
     }
 }
 
