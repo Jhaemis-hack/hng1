@@ -4,7 +4,7 @@ const app =express()
 const cors = require('cors')
 const { Num } = require('./functions')
 const redis = require('redis')
-const port = 4040
+const port = 3000
 
 app.use(cors()) 
 

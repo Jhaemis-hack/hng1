@@ -20,7 +20,7 @@ const isPrime = (number) => {
         }
     }
     
-    return { is_prime, divisor };
+    return { is_prime, divisor: [...new Set(divisor)] };
 };
 
 const isPerfect = (number, divisor) =>{
@@ -83,11 +83,12 @@ const number_Api=async (number)=>{
 
 const Num =async (req, res) =>{
     try {
-        let number = Number(req.query.number)                 
+        let num = req.query.number
+        let number = Number(num)                         
 
         if(isNaN(number) == true ||
-            Number.isInteger(number) == false||
-            number === 0){
+            Number.isInteger(number) == false ||
+            num === ""){
             return res.status(400).json({
                 "number": `${req.query.number}`,
                 "error": true
