@@ -89,7 +89,6 @@ const Num =async (req, res) =>{
 
         if(isNaN(number) == true ||
             Number.isInteger(number) == false||
-            Math.sign(number) == -1 ||
             number === 0){
             return res.status(400).json({
                 "number": `${req.query.number}`,
