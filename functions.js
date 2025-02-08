@@ -40,7 +40,8 @@ const isPerfect = (number, divisor) =>{
     return result = {is_perfect}
 }  
 
-const armstrongDigitSum = (number) =>{
+const armstrongDigitSum = (Number) =>{
+    let number = Math.abs(Number)
     let terminateProp = false;
     let digit_sum = 0
     let strNum = number.toString()
@@ -70,7 +71,7 @@ const armstrongDigitSum = (number) =>{
         if(number%2 === 0){
             properties.push('even')
         }else{
-            properties.push('old')
+            properties.push('odd')
         }
         digit_sum = numSum
         terminateProp = true;
@@ -85,7 +86,7 @@ const number_Api=async (number)=>{
 
 const Num =async (req, res) =>{
     try {
-        const number = Number(req.query.number)                 
+        let number = Number(req.query.number)                 
 
         if(isNaN(number) == true ||
             Number.isInteger(number) == false||
@@ -103,7 +104,7 @@ const Num =async (req, res) =>{
 
         return res.status(200).json({
             number,
-            is_prime,
+            is_prime, 
             is_perfect,
             properties,
             digit_sum,
